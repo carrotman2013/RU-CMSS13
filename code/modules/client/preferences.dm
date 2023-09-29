@@ -238,6 +238,9 @@ var/const/MAX_SAVE_SLOTS = 10
 	/// if this client has tooltips enabled
 	var/tooltips = TRUE
 
+	var/tts_voice
+	var/forced_voice = "papa"
+
 /datum/preferences/New(client/C)
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
 	macros = new(C, src)
@@ -328,6 +331,7 @@ var/const/MAX_SAVE_SLOTS = 10
 			dat += "<h2><b><u>Physical Information:</u></b>"
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>&reg;</A></h2>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
+			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice;task=input'><b>[GLOB.tts_voices[forced_voice]]</b></a><br>"
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 			dat += "<b>Ethnicity:</b> <a href='?_src_=prefs;preference=ethnicity;task=input'><b>[ethnicity]</b></a><br>"
 			dat += "<b>Body Type:</b> <a href='?_src_=prefs;preference=body_type;task=input'><b>[body_type]</b></a><br>"
@@ -1473,6 +1477,19 @@ var/const/MAX_SAVE_SLOTS = 10
 					var/new_age = tgui_input_number(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference", 19, AGE_MAX, AGE_MIN)
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+
+				if("tts_voice")
+					var/list/tts_list = list()
+					for(var/vc in GLOB.tts_voices)
+						tts_list[GLOB.tts_voices[vc]] = vc
+
+					var/new_voice = tgui_input_list(user, "Выбор голоса:", "Настройки персонажа", tts_list)
+					if(new_voice)
+						forced_voice = tts_list[new_voice]
+						user?.voice = forced_voice
+
+					var/random_text = pick("Это мой голос.", "Ксеноморф в вентиляции!", "КО опять убил просто так.")
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, speaker = forced_voice, local = TRUE)
 
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null

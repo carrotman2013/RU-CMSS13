@@ -287,6 +287,7 @@ s// DM Environment file for colonialmarines.dme.
 #include "code\controllers\subsystem\time_track.dm"
 #include "code\controllers\subsystem\timer.dm"
 #include "code\controllers\subsystem\tracking.dm"
+#include "code\controllers\subsystem\tts.dm"
 #include "code\controllers\subsystem\vote.dm"
 #include "code\controllers\subsystem\weather.dm"
 #include "code\controllers\subsystem\x_evolution.dm"

@@ -12,3 +12,8 @@
 			remove_ventcrawl()
 			update_pipe_icons(A)
 
+	if(SStts.tts_enabled)
+		if(client?.prefs?.forced_voice)
+			voice = client.prefs.forced_voice
+		else
+			voice = pick(GLOB.tts_voices)

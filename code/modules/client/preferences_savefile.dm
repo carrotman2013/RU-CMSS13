@@ -80,6 +80,10 @@
 		sound_toggles |= (SOUND_ADMIN_MEME|SOUND_ADMIN_ATMOSPHERIC)
 		S["toggles_sound"] << sound_toggles
 
+	if (savefile_version < 21)
+		if(!(forced_voice in GLOB.tts_voices))
+			forced_voice = pick(GLOB.tts_voices)
+
 	savefile_version = SAVEFILE_VERSION_MAX
 	return 1
 
@@ -399,6 +403,7 @@
 	S["body_is_always_random"] >> be_random_body
 	S["gender"] >> gender
 	S["age"] >> age
+	S["forced_voice"] >> forced_voice
 	S["ethnicity"] >> ethnicity
 	S["body_type"] >> body_type
 	S["language"] >> language
@@ -546,6 +551,7 @@
 	S["body_is_always_random"] << be_random_body
 	S["gender"] << gender
 	S["age"] << age
+	S["forced_voice"] << forced_voice
 	S["ethnicity"] << ethnicity
 	S["body_type"] << body_type
 	S["language"] << language

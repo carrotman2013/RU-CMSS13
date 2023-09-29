@@ -274,6 +274,9 @@
 	// contains /atom/movable/screen/alert only
 	var/list/alerts = list()
 
+	var/voice
+	var/speaker
+
 /mob/vv_get_dropdown()
 	. = ..()
 	VV_DROPDOWN_OPTION(VV_HK_EXPLODE, "Trigger Explosion")

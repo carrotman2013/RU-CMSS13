@@ -150,6 +150,7 @@ var/list/department_radio_keys = list(
 
 		var/list/listening = list()
 		var/list/listening_obj = list()
+		var/list/listened = list()
 
 		if(HAS_TRAIT(src, TRAIT_LISPING))
 			var/old_message = message
@@ -185,18 +186,23 @@ var/list/department_radio_keys = list(
 		var/image/speech_bubble = image('icons/mob/effects/talk.dmi', src, "[bubble_type][speech_bubble_test]", FLY_LAYER)
 
 		var/not_dead_speaker = (stat != DEAD)
+		var/found_client = FALSE
 		if(not_dead_speaker)
 			langchat_speech(message, listening, speaking)
 		for(var/mob/M as anything in listening)
 			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+			found_client = TRUE
 		overlays += speech_bubble
+
+		if(found_client)
+			INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), /datum/language, voice, listened, message_range)
+
 
 		addtimer(CALLBACK(src, PROC_REF(remove_speech_bubble), speech_bubble), 3 SECONDS)
 
 		for(var/obj/O as anything in listening_obj)
 			if(O) //It's possible that it could be deleted in the meantime.
 				O.hear_talk(src, message, verb, speaking, italics)
-
 	//used for STUI to stop logging of animal messages and radio
 	//if(!nolog)
 	//Rather see stuff twice then not at all.
