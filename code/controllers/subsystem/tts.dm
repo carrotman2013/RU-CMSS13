@@ -252,24 +252,24 @@ SUBSYSTEM_DEF(tts)
 		var/audio_to_use = audio
 		if(get_dist(listener, turf_source) <= range)
 			playsound_client(
-				file = audio_to_use,
-				channel = channel,
-				volume = sound_volume,
+				S.file = audio_to_use,
+				S.channel = channel,
+				S.volume = sound_volume,
 //				falloff_exponent = SOUND_FALLOFF_EXPONENT,
 //				pressure_affected = TRUE,
-				frequency = freq,
-				falloff = 1,
-				range = SOUND_RANGE,
+				S.frequency = freq,
+				S.falloff = 1,
+				S.range = SOUND_RANGE,
 //				distance_multiplier = 1,
 //				echo,
 			)
 		else if (is_radio)
 			playsound_client(
-				file = audio_to_use,
-				channel = channel,
-				volume = 30,
-				frequency = freq,
-				echo = 0,
+				S.file = audio_to_use,
+				S.channel = channel,
+				S.volume = 30,
+				S.frequency = freq,
+				S.echo = 0,
 			)
 
 // Need to wait for all HTTP requests to complete here because of a rustg crash bug that causes crashes when dd restarts whilst HTTP requests are ongoing.
