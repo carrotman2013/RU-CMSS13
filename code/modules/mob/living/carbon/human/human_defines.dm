@@ -63,8 +63,6 @@
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
 
-	var/voice
-
 	var/speech_problem_flag = FALSE
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.

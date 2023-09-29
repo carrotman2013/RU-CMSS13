@@ -1,6 +1,3 @@
-#define rustg_http_request_blocking(method, url, body, headers, options) RUSTG_CALL(RUST_G, "http_request_blocking")(method, url, body, headers, options)
-#define rustg_http_request_async(method, url, body, headers, options) RUSTG_CALL(RUST_G, "http_request_async")(method, url, body, headers, options)
-
 #define CHANNEL_TTS_AVAILABLE 1006
 #define CHANNEL_BOOMBOX_AVAILABLE 800
 #define SOUND_FALLOFF_EXPONENT 6
@@ -255,28 +252,24 @@ SUBSYSTEM_DEF(tts)
 		var/audio_to_use = audio
 		if(get_dist(listener, turf_source) <= range)
 			playsound_client(
-				turf_source,
+				file = audio_to_use,
+				channel = channel,
 				volume = sound_volume,
 //				falloff_exponent = SOUND_FALLOFF_EXPONENT,
-				channel = channel,
 //				pressure_affected = TRUE,
-				file = audio_to_use,
-				range = SOUND_RANGE,
+				frequency = freq,
 				falloff = 1,
+				range = SOUND_RANGE,
 //				distance_multiplier = 1,
 //				echo,
-				frequency = freq,
-				vary = freq ? TRUE : FALSE
 			)
 		else if (is_radio)
 			playsound_client(
-				null,
-				volume = 30,
-				channel = channel,
 				file = audio_to_use,
-				echo = 0,
+				channel = channel,
+				volume = 30,
 				frequency = freq,
-				vary = freq ? TRUE : FALSE
+				echo = 0,
 			)
 
 // Need to wait for all HTTP requests to complete here because of a rustg crash bug that causes crashes when dd restarts whilst HTTP requests are ongoing.
