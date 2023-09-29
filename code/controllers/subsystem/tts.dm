@@ -253,7 +253,7 @@ SUBSYSTEM_DEF(tts)
 			playsound(turf_source,
 				audio_to_use,
 				vol = sound_volume,
-				vary = TRUE
+				vary = TRUE,
 				range = SOUND_RANGE,
 				channel = open_sound_channel_for_tts(),
 //				falloff_exponent = SOUND_FALLOFF_EXPONENT,
