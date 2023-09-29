@@ -33,6 +33,8 @@ Basics, the most important.
 
 /datum/config_entry/string/dburl
 
+/datum/config_entry/string/tts_key
+
 /// Server to notify of game events
 /datum/config_entry/string/manager_url
 
