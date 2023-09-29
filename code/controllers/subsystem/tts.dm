@@ -389,7 +389,7 @@ SUBSYSTEM_DEF(tts)
 
 #undef TTS_ARBRITRARY_DELAY
 
-/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, datum/language/language, var/speaker, list/listeners, var/local = FALSE, message_range = 7, volume_offset = 0, freq = 0, effect = null)
+/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, datum/language/language, speaker, list/listeners, local = FALSE, message_range = 7, volume_offset = 0, freq = 0, effect = null)
 	if(!tts_enabled)
 		return
 
@@ -459,6 +459,8 @@ SUBSYSTEM_DEF(tts)
 	/// Это радио?
 	var/is_radio
 
+	var/voice
+	var/speaker
 
 /datum/tts_request/New(identifier, datum/http_request/request, message, target, local, datum/language/language, message_range, volume_offset, list/listeners, freq, is_radio)
 	. = ..()
