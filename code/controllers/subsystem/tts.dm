@@ -422,7 +422,7 @@ SUBSYSTEM_DEF(tts)
 	query["ext"] = "ogg"
 	query["effect"] = "[effect]"
 //	request.prepare(RUSTG_HTTP_METHOD_GET, "http://tts.ss14.su:2386/?speaker=[speaker]&effect=[effect]&text=[shell_scrubbed_input]&ext=ogg", null, null, file_name)
-	request.prepare(RUSTG_HTTP_METHOD_GET, "https://pubtts.ss14.su/api/v1/tts", params=query, headers=headers, file_name)
+	request.prepare(RUSTG_HTTP_METHOD_GET, "https://pubtts.ss14.su/api/v1/tts", query, headers, file_name)
 
 
 	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, shell_scrubbed_input, target, local, language, message_range, volume_offset, listeners, freq, is_radio = (effect == "radio"))
