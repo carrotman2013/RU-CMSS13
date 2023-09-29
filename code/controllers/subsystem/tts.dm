@@ -17,7 +17,9 @@
 	cmp = compare
 
 /datum/heap/Destroy(force, ...)
-	QDEL_LIST(L) // because this is before the list helpers are loaded
+	for(var/i in L) // because this is before the list helpers are loaded
+		qdel(i)
+	L = null
 	return ..()
 
 /datum/heap/proc/is_empty()
@@ -215,6 +217,9 @@ SUBSYSTEM_DEF(tts)
 
 	/// Used for caching
 	var/current_date = "NULL"
+
+//	var/voice
+//	var/speaker
 
 /datum/controller/subsystem/tts/vv_edit_var(var_name, var_value)
 	// tts being enabled depends on whether it actually exists
