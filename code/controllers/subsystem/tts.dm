@@ -243,7 +243,6 @@ SUBSYSTEM_DEF(tts)
 	if(!turf_source)
 		return
 
-	var/channel = open_sound_channel_for_tts()
 	for(var/mob/listener in listeners)//observers always hear through walls (НЕТ)
 		var/sound_volume = ((listener == target)? 30 : 45) + volume_offset
 		for(var/datum/language/speaking in listener.languages)
@@ -251,25 +250,26 @@ SUBSYSTEM_DEF(tts)
 				continue
 		var/audio_to_use = audio
 		if(get_dist(listener, turf_source) <= range)
-			playsound_client(
-				S.file = audio_to_use,
-				S.channel = channel,
-				S.volume = sound_volume,
+			playsound(turf_source,
+				audio_to_use,
+				vol = sound_volume,
+				vary = TRUE
+				range = SOUND_RANGE,
+				channel = open_sound_channel_for_tts(),
 //				falloff_exponent = SOUND_FALLOFF_EXPONENT,
 //				pressure_affected = TRUE,
-				S.frequency = freq,
-				S.falloff = 1,
-				S.range = SOUND_RANGE,
+				frequency = freq,
+//				falloff = 1,
 //				distance_multiplier = 1,
 //				echo,
 			)
 		else if (is_radio)
-			playsound_client(
-				S.file = audio_to_use,
-				S.channel = channel,
-				S.volume = 30,
-				S.frequency = freq,
-				S.echo = 0,
+			playsound_client(listener.client,
+				audio_to_use,
+				vol = 30,
+				frequency = freq,
+				channel = open_sound_channel_for_tts(),
+				echo = 0,
 			)
 
 // Need to wait for all HTTP requests to complete here because of a rustg crash bug that causes crashes when dd restarts whilst HTTP requests are ongoing.
