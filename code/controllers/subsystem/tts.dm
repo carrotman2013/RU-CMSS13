@@ -254,11 +254,11 @@ SUBSYSTEM_DEF(tts)
 				audio_to_use,
 				vol = sound_volume,
 				vary = TRUE,
-				range = SOUND_RANGE,
+				sound_range = SOUND_RANGE,
 				channel = open_sound_channel_for_tts(),
 //				falloff_exponent = SOUND_FALLOFF_EXPONENT,
 //				pressure_affected = TRUE,
-				frequency = freq,
+//				frequency = freq,
 //				falloff = 1,
 //				distance_multiplier = 1,
 //				echo,
@@ -267,7 +267,7 @@ SUBSYSTEM_DEF(tts)
 			playsound_client(listener.client,
 				audio_to_use,
 				vol = 30,
-				frequency = freq,
+//				frequency = freq,
 				channel = open_sound_channel_for_tts(),
 				echo = 0,
 			)
@@ -389,7 +389,7 @@ SUBSYSTEM_DEF(tts)
 
 #undef TTS_ARBRITRARY_DELAY
 
-/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, datum/language/language, speaker, list/listeners, local = FALSE, message_range = 7, volume_offset = 0, freq = 0, effect = null)
+/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, datum/language/language, var/speaker, list/listeners, var/local = FALSE, message_range = 7, volume_offset = 0, freq = 0, effect = null)
 	if(!tts_enabled)
 		return
 
