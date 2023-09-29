@@ -1489,7 +1489,7 @@ var/const/MAX_SAVE_SLOTS = 10
 						user?.voice = forced_voice
 
 					var/random_text = pick("Это мой голос.", "Ксеноморф в вентиляции!", "КО опять убил просто так.")
-					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, forced_voice, TRUE)
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, forced_voice, language, TRUE)
 
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
