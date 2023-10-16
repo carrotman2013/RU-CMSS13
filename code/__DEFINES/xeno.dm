@@ -616,6 +616,12 @@
 #define XENO_SHIELD_SOURCE_CUMULATIVE_GENERIC 10
 
 //XENO CASTES
+
+//BOTS
+#define XENO_CASTE_BOT_DRONE  "Drone"
+#define XENO_CASTE_BOT_TROOPER   "Trooper"
+#define XENO_CASTE_BOT_TEARER "Tearer"
+
 #define XENO_CASTE_LARVA  "Bloody Larva"
 #define XENO_CASTE_PREDALIEN_LARVA   "Predalien Larva"
 #define XENO_CASTE_FACEHUGGER "Facehugger"

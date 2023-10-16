@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/alien/spawnable
 	var/icon_name = "Drone"
-	caste_name = null
+	caste_name = XENO_CASTE_BOT_DRONE
 	desc = "Bork."
 	icon = 'fray-marines/icons/mob/xenos/lesser_xeno.dmi'
 	icon_gib = "gibbed-a"
@@ -36,6 +36,7 @@
 /mob/living/simple_animal/hostile/alien/spawnable/New()
 	. = ..()
 	target_mob = FindTarget()
+	GLOB.living_xenobot_list += src
 
 /mob/living/simple_animal/hostile/alien/spawnable/generate_name()
 	change_real_name(src, "\improper[caste_name] (WT-[rand(1, 999)])")
@@ -192,6 +193,7 @@
 	if(!.)
 		return //If they were already dead, it will return.
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(xgibs), get_turf(src)), 3 SECONDS)
+	GLOB.living_xenobot_list -= src
 
 /mob/living/simple_animal/hostile/alien/spawnable/spawn_gibs()
 	xgibs(get_turf(src))

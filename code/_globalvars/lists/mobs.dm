@@ -22,6 +22,7 @@ GLOBAL_LIST_EMPTY_TYPED(alive_human_list, /mob/living/carbon/human) // list of a
 
 GLOBAL_LIST_EMPTY_TYPED(xeno_mob_list, /mob/living/carbon/xenomorph)
 GLOBAL_LIST_EMPTY_TYPED(living_xeno_list, /mob/living/carbon/xenomorph)
+GLOBAL_LIST_EMPTY_TYPED(living_xenobot_list, /mob/living/simple_animal/hostile/alien/spawnable)
 GLOBAL_LIST_EMPTY_TYPED(xeno_cultists, /mob/living/carbon/human)
 GLOBAL_LIST_EMPTY_TYPED(player_embryo_list, /obj/item/alien_embryo)
 

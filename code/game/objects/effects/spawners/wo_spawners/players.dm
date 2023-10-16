@@ -15,6 +15,9 @@
 	name = "Xeno Spawn"
 	icon_state = "x"
 
+/obj/effect/landmark/whiskey_outpost/xenobotspawn
+	name = "Xeno Spawn"
+	icon_state = "x"
 
 //Landmarks to spawn in more landmarks. Would you like redundancy on your redundancy?
 //But in seriousness, this is for admins to spawn in, so they only need to spawn in 4-8 things, instead of 200+, making the delay for round start much shorter for players.

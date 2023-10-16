@@ -42,6 +42,7 @@ block( \
 #define MAP_CHINOOK "Chinook 91 GSO" //admin level
 
 #define GAMEMODE_WHISKEY_OUTPOST "Whiskey Outpost"
+#define GAMEMODE_VODKA_OUTPOST "Vodka Outpost"
 #define GAMEMODE_HIVE_WARS "Hive Wars"
 
 /// Number of players before we switch to lowpop maps only (LV, BR, Prison).

@@ -50,6 +50,8 @@
 /obj/structure/techpod_vendor/proc/get_access_permission(mob/living/carbon/human/user)
 	if(SSticker.mode == GAMEMODE_WHISKEY_OUTPOST || master_mode == GAMEMODE_WHISKEY_OUTPOST) //all WO has lifted access restrictions
 		return TRUE
+	if(SSticker.mode == GAMEMODE_VODKA_OUTPOST || master_mode == GAMEMODE_VODKA_OUTPOST) //all VO has lifted access restrictions
+		return TRUE
 	else if(SSticker.mode == "Distress Signal" || master_mode == "Distress Signal")
 		if(access_settings_override) //everyone allowed to grab stuff
 			return TRUE

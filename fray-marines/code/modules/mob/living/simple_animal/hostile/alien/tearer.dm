@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/alien/spawnable/tearer
 	icon_name = "Ravager"
-	caste_name = "tearer"
+	caste_name = XENO_CASTE_BOT_TEARER
 	name = "tearer"
 	icon = 'fray-marines/icons/mob/xenos/lesser_xeno_big.dmi'
 	desc = "Weakened version of a Ravager."

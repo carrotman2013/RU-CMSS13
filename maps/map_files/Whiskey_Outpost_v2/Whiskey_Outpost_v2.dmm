@@ -452,6 +452,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/gm/dirtgrassborder/north,
 /area/whiskey_outpost/outside/lane/three_south)
+"bE" = (
+/obj/effect/landmark/whiskey_outpost/xenobotspawn,
+/turf/open/gm/dirt,
+/area/whiskey_outpost/inside/caves/caverns/west)
 "bF" = (
 /obj/structure/disposalpipe/segment,
 /turf/open/jungle,
@@ -10442,6 +10446,10 @@
 	icon_state = "floor_plate"
 	},
 /area/whiskey_outpost/inside/bunker/bunker/front)
+"Ng" = (
+/obj/effect/landmark/whiskey_outpost/xenobotspawn,
+/turf/open/gm/dirt,
+/area/whiskey_outpost/inside/caves/caverns/east)
 "Nh" = (
 /obj/effect/landmark/start/whiskey/marine,
 /turf/open/gm/dirt,
@@ -11204,6 +11212,10 @@
 	icon_state = "grass_impenetrable"
 	},
 /area/whiskey_outpost/outside/south/very_far)
+"QQ" = (
+/obj/effect/landmark/whiskey_outpost/xenobotspawn,
+/turf/open/gm/dirt,
+/area/whiskey_outpost/outside/south)
 "QR" = (
 /turf/open/gm/dirt{
 	icon_state = "desert3"
@@ -12740,6 +12752,10 @@
 	icon_state = "rasputin0"
 	},
 /area/whiskey_outpost/outside/lane/four_north)
+"XC" = (
+/obj/effect/landmark/whiskey_outpost/xenobotspawn,
+/turf/open/gm/dirtgrassborder/west,
+/area/whiskey_outpost/outside/south)
 "XD" = (
 /obj/structure/flora/bush/ausbushes/reedbush,
 /turf/open/gm/river,
@@ -12880,6 +12896,13 @@
 	icon_state = "asteroidfloor"
 	},
 /area/whiskey_outpost/outside/north)
+"Yh" = (
+/obj/effect/landmark/whiskey_outpost/xenobotspawn,
+/turf/open/jungle{
+	bushes_spawn = 0;
+	icon_state = "grass_impenetrable"
+	},
+/area/whiskey_outpost/outside/south)
 "Yj" = (
 /obj/structure/machinery/power/apc/almayer{
 	dir = 1
@@ -18140,7 +18163,7 @@ Kt
 uJ
 uJ
 uJ
-uJ
+bE
 Wz
 uJ
 uJ
@@ -24409,7 +24432,7 @@ lf
 lf
 lf
 lf
-kV
+Yh
 kV
 lf
 ZB
@@ -27246,7 +27269,7 @@ zU
 zU
 zU
 zU
-zU
+XC
 ZF
 ZF
 ZF
@@ -27645,7 +27668,7 @@ kV
 kV
 kV
 gr
-kn
+QQ
 kn
 kn
 kn
@@ -28456,7 +28479,7 @@ LM
 lf
 kV
 kV
-kV
+Yh
 oq
 kV
 zt
@@ -30673,7 +30696,7 @@ lf
 ac
 kV
 lf
-kV
+Yh
 ZB
 RP
 SX
@@ -31481,7 +31504,7 @@ lf
 lf
 lf
 kV
-kV
+Yh
 ZB
 mT
 mT
@@ -35918,7 +35941,7 @@ TX
 uE
 uE
 uE
-uE
+Ng
 uE
 uE
 uE
