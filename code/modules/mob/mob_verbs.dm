@@ -139,7 +139,7 @@
 		to_chat(usr, "You have been dead for[pluralcheck] [deathtimeseconds] seconds.")
 		if(G.respawns_available <= 0)
 			to_chat(usr, "Players have used all respawn points for this game.")
-		if(world.time <= src.timeofdeath + 25 MINUTES) //25 минут
+		if(world.time <= src.timeofdeath + 20 MINUTES) //25 минут
 //		if(world.time <= src.timeofdeath + 10 SECONDS) //10 сек (для тестов)
 			to_chat(usr, "Respawn is available after 25 minutes.")
 			return
