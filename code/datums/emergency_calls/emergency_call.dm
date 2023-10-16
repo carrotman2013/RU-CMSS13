@@ -9,6 +9,7 @@
 	var/list/datum/emergency_call/all_calls = list() //initialized at round start and stores the datums.
 	var/datum/emergency_call/picked_calls[] = list() //Which distress calls are currently active
 	var/ert_dispatched = FALSE
+	var/respawns_available = 25 //Сколько респаунов на игру?
 
 /datum/game_mode/proc/ares_online()
 	var/name = "ARES Online"
@@ -204,7 +205,7 @@
 
 	if(!quiet_launch)
 		marine_announcement("Активирован сигнал бедствия на борту [MAIN_SHIP_NAME].", "Приоритетное оповещение", 'sound/AI/distressbeacon.ogg', logging = ARES_LOG_SECURITY)
-		
+
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/emergency_call, spawn_candidates), quiet_launch, announce, override_spawn_loc, announce_dispatch_message), 30 SECONDS)
 
 /datum/emergency_call/proc/spawn_candidates(quiet_launch = FALSE, announce = TRUE, override_spawn_loc, announce_dispatch_message = TRUE)

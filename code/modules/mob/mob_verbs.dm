@@ -107,18 +107,23 @@
 	set name = "Respawn"
 	set category = "OOC"
 
-	var/is_admin = 0
-	if(client.admin_holder && (client.admin_holder.rights & R_ADMIN))
-		is_admin = 1
+//Больше никаких блатных респаунов администраторам
+//	var/is_admin = 0
+//	if(client.admin_holder && (client.admin_holder.rights & R_ADMIN))
+//		is_admin = 1
 
-	if (!CONFIG_GET(flag/respawn) && !is_admin)
-		to_chat(usr, SPAN_NOTICE(" Respawn is disabled."))
-		return
+//	if (!CONFIG_GET(flag/respawn) && !is_admin)
+//		to_chat(usr, SPAN_NOTICE(" Respawn is disabled."))
+//		return
+	var/datum/game_mode/G = SSticker.mode
 	if (stat != 2)
 		to_chat(usr, SPAN_NOTICE(" <B>You must be dead to use this!</B>"))
 		return
 	if (SSticker.mode && (SSticker.mode.name == "meteor" || SSticker.mode.name == "epidemic")) //BS12 EDIT
 		to_chat(usr, SPAN_NOTICE(" Respawn is disabled for this roundtype."))
+		return
+	if (!isobserver(src))
+		to_chat(usr, SPAN_NOTICE(" You must ghost to do this."))
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath
@@ -132,9 +137,19 @@
 			pluralcheck = " [deathtimeminutes] minutes and"
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		to_chat(usr, "You have been dead for[pluralcheck] [deathtimeseconds] seconds.")
+		if(G.respawns_available <= 0)
+			to_chat(usr, "Players have used all respawn points for this game.")
+		if(world.time <= src.timeofdeath + 25 MINUTES) //25 минут
+//		if(world.time <= src.timeofdeath + 10 SECONDS) //10 сек (для тестов)
+			to_chat(usr, "Respawn is available after 25 minutes.")
+			return
 
 	if(alert("Are you sure you want to respawn?",,"Yes","No") != "Yes")
 		return
+
+	G.respawns_available -= 1
+	for(var/mob/dead/observer/observer as anything in GLOB.observer_list)
+		to_chat(observer, SPAN_DEADSAY(FONT_SIZE_LARGE("Total respawn points available: [G.respawns_available]")))
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
