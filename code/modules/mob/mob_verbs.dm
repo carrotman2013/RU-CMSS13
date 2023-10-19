@@ -139,40 +139,23 @@
 		to_chat(usr, "You have been dead for[pluralcheck] [deathtimeseconds] seconds.")
 		if(G.respawns_available <= 0)
 			to_chat(usr, "Players have used all respawn points for this game.")
-		if(world.time <= src.timeofdeath + 20 MINUTES) //25 минут
+		if(world.time <= src.timeofdeath + 20 MINUTES) //20 минут
 //		if(world.time <= src.timeofdeath + 10 SECONDS) //10 сек (для тестов)
-			to_chat(usr, "Respawn is available after 25 minutes.")
+			to_chat(usr, "Respawn is available after 20 minutes.")
 			return
 
-	if(alert("Are you sure you want to respawn?",,"Yes","No") != "Yes")
+	if(alert("Are you sure you want to respawn as a squad marine?",,"Yes","No") != "Yes")
 		return
 
 	G.respawns_available -= 1
 	for(var/mob/dead/observer/observer as anything in GLOB.observer_list)
-		to_chat(observer, SPAN_DEADSAY(FONT_SIZE_LARGE("Total respawn points available: [G.respawns_available]")))
+		to_chat(observer, SPAN_DEADSAY(FONT_SIZE_LARGE("Respawn points available: [G.respawns_available]")))
 
-	log_game("[usr.name]/[usr.key] used abandon mob.")
+	log_game("[usr.name]/[usr.key] used respawn button.")
 
-	to_chat(usr, SPAN_NOTICE(" <B>Make sure to play a different character, and please roleplay correctly!</B>"))
-
-	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
-		return
-	client.screen.Cut()
-	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
-		return
-
-	var/mob/new_player/M = new /mob/new_player()
-	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
-		qdel(M)
-		return
-
-	M.key = key
-	if(M.client) M.client.change_view(world_view_size)
+	SSticker.mode.attempt_to_join_as_rifleman(usr)
 // M.Login() //wat
-	return
+//	return
 
 /mob/dead/observer/verb/observe()
 	set name = "Observe"

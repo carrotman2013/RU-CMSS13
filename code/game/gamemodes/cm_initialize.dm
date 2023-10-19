@@ -171,6 +171,78 @@ Additional game mode variables.
 
 #define calculate_pred_max (Floor(length(GLOB.player_list) / pred_per_players) + pred_additional_max + pred_start_count)
 
+/datum/game_mode/proc/attempt_to_join_as_rifleman()
+	var/datum/job/player_rank = RoleAuthority.roles_for_mode[JOB_SQUAD_MARINE]
+
+	if(SSticker.current_state != GAME_STATE_PLAYING)
+		to_chat(usr, SPAN_WARNING("The round is either not ready, or has already finished!"))
+		return
+	if(!enter_allowed)
+		to_chat(usr, SPAN_WARNING("There is an administrative lock on entering the game! (The dropship likely crashed into the Almayer. This should take at most 20 minutes.)"))
+		return
+
+	var/mob/living/carbon/human/character
+	var/turf/rloc = get_turf(pick(GLOB.latejoin))
+	character = new(rloc)
+	character.lastarea = get_area(rloc)
+	character.gender = pick(50;MALE,50;FEMALE)
+	var/datum/preferences/TP = new()
+	TP.randomize_appearance(character)
+	character.real_name = random_name(character.gender)
+
+	character.job = player_rank
+	character.name = character.real_name
+	character.voice = character.real_name
+
+	// Update the character icons
+	// This is done in set_species when the mob is created as well, but
+	INVOKE_ASYNC(character, TYPE_PROC_REF(/mob/living/carbon/human, regenerate_icons))
+	INVOKE_ASYNC(character, TYPE_PROC_REF(/mob/living/carbon/human, update_body), 1, 0)
+	INVOKE_ASYNC(character, TYPE_PROC_REF(/mob/living/carbon/human, update_hair))
+
+	character.key = usr.key //Manually transfer the key to log them in
+	character.client?.change_view(world_view_size)
+
+	RoleAuthority.equip_role(character, player_rank, late_join = TRUE)
+	EquipCustomItems(character)
+
+	if((security_level > SEC_LEVEL_BLUE || EvacuationAuthority.evac_status) && player_rank.gets_emergency_kit)
+		to_chat(character, SPAN_HIGHDANGER("As you stagger out of hypersleep, the sleep bay blares: '[EvacuationAuthority.evac_status ? "VESSEL UNDERGOING EVACUATION PROCEDURES, SELF DEFENSE KIT PROVIDED" : "VESSEL IN HEIGHTENED ALERT STATUS, SELF DEFENSE KIT PROVIDED"]'."))
+		character.put_in_hands(new /obj/item/storage/box/kit/cryo_self_defense(character.loc))
+
+	GLOB.data_core.manifest_inject(character)
+	SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc. //TODO!!!!! ~Carn
+	SSticker.mode.latejoin_tally += RoleAuthority.calculate_role_weight(player_rank)
+
+	for(var/datum/squad/sq in RoleAuthority.squads)
+		if(sq)
+			sq.max_engineers = engi_slot_formula(GLOB.clients.len)
+			sq.max_medics = medic_slot_formula(GLOB.clients.len)
+
+	if(SSticker.mode.latejoin_larva_drop && SSticker.mode.latejoin_tally >= SSticker.mode.latejoin_larva_drop)
+		SSticker.mode.latejoin_tally -= SSticker.mode.latejoin_larva_drop
+		var/datum/hive_status/hive
+		for(var/hivenumber in GLOB.hive_datum)
+			hive = GLOB.hive_datum[hivenumber]
+			if(hive.latejoin_burrowed == TRUE)
+				if(length(hive.totalXenos) && (hive.hive_location || ROUND_TIME < XENO_ROUNDSTART_PROGRESS_TIME_2))
+					hive.stored_larva++
+					hive.hive_ui.update_burrowed_larva()
+
+	if(character.mind && character.mind.player_entity)
+		var/datum/entity/player_entity/player = character.mind.player_entity
+		if(player.get_playtime(STATISTIC_HUMAN) == 0 && player.get_playtime(STATISTIC_XENO) == 0)
+			msg_admin_niche("NEW JOIN: <b>[key_name(character, 1, 1, 0)]</b>. IP: [character.lastKnownIP], CID: [character.computer_id]")
+		if(character.client)
+			var/client/C = character.client
+			if(C.player_data && C.player_data.playtime_loaded && length(C.player_data.playtimes) == 0)
+				msg_admin_niche("NEW PLAYER: <b>[key_name(character, 1, 1, 0)]</b>. IP: [character.lastKnownIP], CID: [character.computer_id]")
+			if(C.player_data && C.player_data.playtime_loaded && ((round(C.get_total_human_playtime() DECISECONDS_TO_HOURS, 0.1)) <= 5))
+				msg_sea("NEW PLAYER: <b>[key_name(character, 0, 1, 0)]</b> only has [(round(C.get_total_human_playtime() DECISECONDS_TO_HOURS, 0.1))] hours as a human. Current role: [get_actual_job_name(character)] - Current location: [get_area(character)]")
+
+	character.client.init_verbs()
+	qdel(src)
+
 /datum/game_mode/proc/check_predator_late_join(mob/pred_candidate, show_warning = 1)
 
 	if(!pred_candidate.client)
