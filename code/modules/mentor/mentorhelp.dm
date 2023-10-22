@@ -123,7 +123,7 @@
 			soundfile = 'sound/effects/mhelp.ogg'
 
 		// Eavesdrop
-		else if(CLIENT_HAS_RIGHTS(admin_client, R_MENTOR) | CLIENT_HAS_RIGHTS(admin_client, R_COUNCIL) && (!staff_only || CLIENT_IS_STAFF(admin_client)) && admin_client != sender)
+		else if(CLIENT_HAS_RIGHTS(admin_client, R_MENTOR) || CLIENT_HAS_RIGHTS(admin_client, R_COUNCIL) && (!staff_only || CLIENT_IS_STAFF(admin_client)) && admin_client != sender)
 			if(include_keys)
 				formatted = SPAN_MENTORHELP(key_name(sender, TRUE) + " -> " + key_name(recipient, TRUE) + ": ") + msg
 
