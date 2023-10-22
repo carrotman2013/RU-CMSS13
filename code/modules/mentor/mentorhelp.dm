@@ -118,7 +118,7 @@
 			continue
 
 		// Initial broadcast
-		else if(!staff_only && !recipient && CLIENT_HAS_RIGHTS(admin_client, R_MENTOR) | CLIENT_HAS_RIGHTS(admin_client, R_COUNCIL))
+		else if(!staff_only && !recipient && (CLIENT_HAS_RIGHTS(admin_client, R_MENTOR) || CLIENT_HAS_RIGHTS(admin_client, R_COUNCIL)))
 			formatted = wrap_message(formatted, sender)
 			soundfile = 'sound/effects/mhelp.ogg'
 
