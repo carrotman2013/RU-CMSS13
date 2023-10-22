@@ -650,7 +650,7 @@
 		X.generate_name()
 
 	else if(href_list["mute"])
-		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))
+		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN) && !check_rights(R_COUNCIL))
 			return
 
 		var/mob/M = locate(href_list["mute"])

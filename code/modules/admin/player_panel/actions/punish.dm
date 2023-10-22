@@ -48,7 +48,7 @@
 /datum/player_action/mute
 	action_tag = "mob_mute"
 	name = "Mute"
-
+	permissions_required = R_COUNCIL
 
 /datum/player_action/mute/act(client/user, mob/target, list/params)
 	if(!target.client)
@@ -157,7 +157,7 @@
 /datum/player_action/reset_human_name
 	action_tag = "reset_human_name"
 	name = "Reset Human Name"
-
+	permissions_required = R_COUNCIL
 
 /datum/player_action/reset_human_name/act(client/user, mob/target, list/params)
 	var/mob/target_mob = target
