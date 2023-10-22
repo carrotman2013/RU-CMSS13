@@ -173,7 +173,7 @@
 		LAZYSET(listings, category, list())
 
 	for(var/client/C in GLOB.admins)
-		if(C.admin_holder?.fakekey && !CLIENT_IS_STAFF(src) | !CLIENT_IS_COUNCIL(src))
+		if(C.admin_holder?.fakekey && !CLIENT_IS_STAFF(src) || !CLIENT_IS_COUNCIL(src))
 			continue
 		for(var/category in mappings)
 			if(CLIENT_HAS_RIGHTS(C, mappings[category]))
