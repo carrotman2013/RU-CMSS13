@@ -12,7 +12,7 @@
 		return
 
 	if(!CLIENT_IS_STAFF(src))
-		if(!CLIENT_IS_MENTOR(src) | !CLIENT_IS_COUNCIL(src))
+		if(!CLIENT_IS_MENTOR(src) && !CLIENT_IS_COUNCIL(src))
 			to_chat(src, "Only staff members have permission to use this.")
 			return
 		if(!CONFIG_GET(flag/mentor_tools))
