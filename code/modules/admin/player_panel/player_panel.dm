@@ -1,6 +1,6 @@
 
 /datum/admins/proc/player_panel_new()//The new one
-	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & R_MOD) || !(usr.client.admin_holder.rights & R_COUNCIL))
+	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & R_MOD) && !(usr.client.admin_holder.rights & R_COUNCIL))
 		return
 	var/dat = "<html>"
 
@@ -276,7 +276,7 @@
 
 //Extended panel with ban related things
 /datum/admins/proc/player_panel_extended()
-	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & R_MOD) || !(usr.client.admin_holder.rights & R_COUNCIL))
+	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & R_MOD) && !(usr.client.admin_holder.rights & R_COUNCIL))
 		return
 
 	var/dat = "<html>"
