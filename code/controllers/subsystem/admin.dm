@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(admin)
 			return
 
 	for(var/client/C in GLOB.admins)
-		if(C && C.admin_holder && (C.admin_holder.rights & R_MOD | C.admin_holder.rights & R_COUNCIL))
+		if(C && C.admin_holder && (C.admin_holder.rights & R_MOD || C.admin_holder.rights & R_COUNCIL))
 			if(C.prefs.toggles_sound & SOUND_ADMINHELP)
 				sound_to(C, 'sound/effects/adminhelp_new.ogg')
 			to_chat(C, msg)
