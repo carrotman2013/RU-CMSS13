@@ -75,7 +75,7 @@
 	set name = "Player Record"
 	if (!istype(src,/datum/admins))
 		src = usr.client.admin_holder
-	if (!istype(src,/datum/admins) || !(src.rights & R_MOD) && !(src.rights & R_COUNCIL))
+	if (!istype(src,/datum/admins) || !(src.rights & R_MOD))
 		to_chat(usr, "Ошибочка - вы не админ!")
 		return
 

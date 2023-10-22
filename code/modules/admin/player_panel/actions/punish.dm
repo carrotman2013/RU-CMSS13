@@ -61,6 +61,7 @@
 /datum/player_action/show_notes
 	action_tag = "show_notes"
 	name = "Show Notes"
+	permissions_required = R_COUNCIL
 
 
 /datum/player_action/show_notes/act(client/user, mob/target, list/params)
