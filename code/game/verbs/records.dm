@@ -83,7 +83,7 @@
 	///Note category options
 	var/list/options = list()
 
-	if(CLIENT_IS_STAFF(src) | CLIENT_IS_COUNCIL(src))
+	if(CLIENT_IS_STAFF(src) || CLIENT_IS_COUNCIL(src))
 		options = note_categories.Copy()
 		if(admin_holder.rights & R_PERMISSIONS)
 			MA = TRUE
