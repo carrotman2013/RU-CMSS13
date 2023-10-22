@@ -84,7 +84,7 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 	if(!admin || !admin.player_data)
 		return FALSE
 	if(note_category == NOTE_ADMIN || is_confidential)
-		if (!AHOLD_IS_MOD(admin.admin_holder))
+		if (!AHOLD_IS_MOD(admin.admin_holder) && !AHOLD_IS_COUNCIL(admin.admin_holder))
 			return FALSE
 
 	// this is here for a short transition period when we still are testing DB notes and constantly deleting the file
@@ -131,7 +131,7 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 	if(!admin || !admin.player_data)
 		return FALSE
 
-	if (!AHOLD_IS_MOD(admin.admin_holder))
+	if (!AHOLD_IS_MOD(admin.admin_holder) && !AHOLD_IS_COUNCIL(admin.admin_holder))
 		return FALSE
 
 	// this is here for a short transition period when we still are testing DB notes and constantly deleting the file

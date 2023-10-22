@@ -148,7 +148,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	current_state = state
 
 /obj/effect/statclick/ticket_list/clicked()
-	if (!CLIENT_IS_STAFF(usr.client))
+	if (!CLIENT_IS_STAFF(usr.client) && !CLIENT_IS_COUNCIL(usr.client))
 		message_admins("[key_name_admin(usr)] non-holder clicked on a ticket list statclick! ([src])")
 		log_game("[key_name(usr)] non-holder clicked on a ticket list statclick! ([src])")
 		return

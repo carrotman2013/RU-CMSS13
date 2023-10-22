@@ -40,7 +40,7 @@
 
 	var/dat = "<html><body><B>Current Players:</B><BR>"
 	var/list/Lines = list()
-	if(admin_holder && ((R_ADMIN & admin_holder.rights) || (R_MOD & admin_holder.rights)))
+	if(admin_holder && ((R_ADMIN & admin_holder.rights) || (R_MOD & admin_holder.rights) || (R_COUNCIL & admin_holder.rights)))
 		for(var/client/C in GLOB.clients)
 			var/entry = "[C.key]"
 			if(C.mob) //Juuuust in case
@@ -52,7 +52,7 @@
 
 				if(isobserver(C.mob))
 					counted_humanoids["Observers"]++
-					if(C.admin_holder?.rights & R_MOD)
+					if(C.admin_holder?.rights & R_MOD | C.admin_holder?.rights & R_COUNCIL)
 						counted_humanoids["Admin observers"]++
 						counted_humanoids["Observers"]--
 					var/mob/dead/observer/O = C.mob
@@ -164,6 +164,7 @@
 	LAZYSET(mappings, "<B style='color:red'>Admins</B>", R_ADMIN)
 	if(CONFIG_GET(flag/show_mods))
 		LAZYSET(mappings, "<B style='color:orange'>Moderators</B>", R_MOD)
+	LAZYSET(mappings, "<B style='color:grey'>Councils</B>", R_COUNCIL)
 	if(CONFIG_GET(flag/show_mentors))
 		LAZYSET(mappings, "<B style='color:green'>Mentors</B>", R_MENTOR)
 
@@ -172,7 +173,7 @@
 		LAZYSET(listings, category, list())
 
 	for(var/client/C in GLOB.admins)
-		if(C.admin_holder?.fakekey && !CLIENT_IS_STAFF(src))
+		if(C.admin_holder?.fakekey && !CLIENT_IS_STAFF(src) | !CLIENT_IS_COUNCIL(src))
 			continue
 		for(var/category in mappings)
 			if(CLIENT_HAS_RIGHTS(C, mappings[category]))

@@ -71,6 +71,13 @@ var/list/admin_verbs_default = list(
 	/client/proc/cmd_mod_say, /* alternate way of typing asay, no different than cmd_admin_say  */
 	)
 
+var/list/admin_verbs_council = list(
+	/datum/admins/proc/show_player_panel,
+	/client/proc/admin_ghost,
+	/client/proc/player_panel_new,
+	/datum/admins/proc/show_player_panel,
+	)
+
 var/list/admin_verbs_admin = list(
 	/datum/admins/proc/togglejoin, /*toggles whether people can join the current game*/
 	/datum/admins/proc/announce, /*priority announce something to all clients.*/
@@ -316,6 +323,9 @@ var/list/roundstart_mod_verbs = list(
 	if(CLIENT_HAS_RIGHTS(src, R_MOD))
 		add_verb(src, admin_verbs_ban)
 		add_verb(src, admin_verbs_teleport)
+	if(CLIENT_HAS_RIGHTS(src, R_COUNCIL))
+		add_verb(src, /client/proc/cmd_mentor_say)
+		add_verb(src, admin_verbs_council)
 	if(CLIENT_HAS_RIGHTS(src, R_EVENT))
 		add_verb(src, admin_verbs_minor_event)
 	if(CLIENT_HAS_RIGHTS(src, R_ADMIN))
@@ -346,7 +356,7 @@ var/list/roundstart_mod_verbs = list(
 		add_verb(src, clan_verbs)
 
 /client/proc/add_admin_whitelists()
-	if(CLIENT_IS_MENTOR(src))
+	if(CLIENT_IS_MENTOR(src) | CLIENT_IS_COUNCIL(src))
 		RoleAuthority.roles_whitelist[ckey] |= WHITELIST_MENTOR
 	if(CLIENT_IS_STAFF(src))
 		RoleAuthority.roles_whitelist[ckey] |= WHITELIST_JOE

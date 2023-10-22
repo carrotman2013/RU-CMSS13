@@ -26,7 +26,7 @@
 	var/datum/player_info/P = new
 	if (usr)
 		P.author = usr.key
-		if(usr.client && usr.client.admin_holder && (usr.client.admin_holder.rights & R_MOD))
+		if(usr.client && usr.client.admin_holder && (usr.client.admin_holder.rights & R_MOD) || (usr.client.admin_holder.rights & R_COUNCIL))
 			P.rank = usr.client.admin_holder.rank
 		else
 			to_chat(usr, "NA01: Что-то не так, зовите кодера.")

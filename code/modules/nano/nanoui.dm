@@ -160,7 +160,7 @@ nanoui is used to open and update nano browser uis
 */
 /datum/nanoui/proc/update_status(push_update = 0)
 	set waitfor = 0
-	if (isnewplayer(user) && check_rights(R_ADMIN|R_MOD))
+	if (isnewplayer(user) && check_rights(R_ADMIN|R_MOD|R_COUNCIL))
 		set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
 	if (isRemoteControlling(user))
 		set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)

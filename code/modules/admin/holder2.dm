@@ -152,6 +152,8 @@ you will have to do something like if(client.admin_holder.rights & R_ADMIN) your
 	var/roles = list()
 	if(check_for_rights(R_ADMIN))
 		roles += "Admin"
+	if(check_for_rights(R_COUNCIL))
+		roles += "Council"
 	if(check_for_rights(R_MOD))
 		roles += "Mod"
 	if(check_for_rights(R_MENTOR))

@@ -41,6 +41,7 @@ var/list/admin_ranks = list() //list of all ranks with associated rights
 				if("nolock") rights |= R_NOLOCK
 				if("spawn","create") rights |= R_SPAWN
 				if("mod") rights |= R_MOD
+				if("council") rights |= R_COUNCIL
 				if("mentor") rights |= R_MENTOR
 				if("profiler") rights |= R_PROFILER
 				if("host") rights |= RL_HOST

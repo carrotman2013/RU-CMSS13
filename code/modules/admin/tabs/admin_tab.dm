@@ -65,7 +65,7 @@
 	set name = "Aghost"
 	set category = "Admin.Game"
 
-	if(!check_rights(R_MOD))
+	if(!check_rights(R_MOD|R_COUNCIL))
 		return
 
 	var/new_STUI = 0
@@ -147,7 +147,7 @@
 	set category = "Admin"
 	if (!istype(src,/datum/admins))
 		src = usr.client.admin_holder
-	if (!istype(src,/datum/admins) || !(src.rights & R_MOD))
+	if (!istype(src,/datum/admins) || !(src.rights & R_MOD) && !(src.rights & R_COUNCIL))
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
@@ -355,7 +355,7 @@
 	set category = "OOC"
 	set hidden = 0
 
-	if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))
+	if(!check_rights(R_MENTOR|R_MOD|R_ADMIN|R_COUNCIL))
 		return
 
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
@@ -368,11 +368,11 @@
 	var/color = "mentorsay"
 	var/channel = "Mentor:"
 	channel = "[admin_holder.rank]:"
-	if(check_rights(R_MOD|R_ADMIN,0))
+	if(check_rights(R_MOD|R_COUNCIL|R_ADMIN,0))
 		color = "mentorstaff"
 
 	for(var/client/C in GLOB.admins)
-		if((R_ADMIN|R_MOD|R_MENTOR) & C.admin_holder.rights)
+		if((R_ADMIN|R_MOD|R_MENTOR|R_COUNCIL) & C.admin_holder.rights)
 			to_chat(C, "<span class='[color]'><span class='prefix'>[channel]</span> <EM>([usr.key])</EM>: <span class='message'>[msg]</span></span>")
 
 /client/proc/get_mentor_say()
@@ -593,7 +593,7 @@
 
 	var/mob/user = usr
 
-	if(!check_rights(R_MOD|R_MENTOR))
+	if(!check_rights(R_MOD|R_MENTOR|R_COUNCIL))
 		return
 
 	if(istype(user, /mob/camera/imaginary_friend))

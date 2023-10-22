@@ -1106,7 +1106,7 @@
 		player_panel_extended()
 
 	else if(href_list["adminplayerobservejump"])
-		if(!check_rights(R_MOD|R_ADMIN))
+		if(!check_rights(R_MOD|R_ADMIN|R_COUNCIL))
 			return
 
 		var/mob/M = locate(href_list["adminplayerobservejump"])
@@ -1118,7 +1118,7 @@
 		C.jumptomob(M)
 
 	else if(href_list["adminplayerfollow"])
-		if(!check_rights(R_MOD|R_ADMIN))
+		if(!check_rights(R_MOD|R_ADMIN|R_COUNCIL))
 			return
 
 		var/mob/M = locate(href_list["adminplayerfollow"])
@@ -2037,7 +2037,7 @@
 		return
 
 	if(href_list["viewnotes"])
-		if(!check_rights(R_MOD))
+		if(!check_rights(R_MOD|R_COUNCIL))
 			return
 
 		var/mob/checking = locate(href_list["viewnotes"])

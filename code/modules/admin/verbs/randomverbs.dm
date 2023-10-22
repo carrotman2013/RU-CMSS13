@@ -12,7 +12,7 @@
 		return
 
 	if(!CLIENT_IS_STAFF(src))
-		if(!CLIENT_IS_MENTOR(src))
+		if(!CLIENT_IS_MENTOR(src) | !CLIENT_IS_COUNCIL(src))
 			to_chat(src, "Only staff members have permission to use this.")
 			return
 		if(!CONFIG_GET(flag/mentor_tools))
@@ -94,7 +94,7 @@
 	set desc = "Toggle your visibility as a ghost to other ghosts."
 	set category = "Preferences.Ghost"
 
-	if(!admin_holder || !(admin_holder.rights & R_MOD)) return
+	if(!admin_holder || !(admin_holder.rights & R_MOD) || !(admin_holder.rights & R_COUNCIL)) return
 
 	if(isobserver(usr))
 		if(usr.invisibility <> 60 && usr.layer <> 4.0)

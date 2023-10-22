@@ -66,6 +66,8 @@
 	for(var/client/candidate in GLOB.admins)
 		if(to_mentors && CLIENT_IS_MENTOR(candidate))
 			hitlist |= candidate
+		if(to_mentors && CLIENT_IS_COUNCIL(candidate))
+			hitlist |= candidate
 		else if(to_staff && CLIENT_IS_STAFF(candidate))
 			hitlist |= candidate
 	var/displaymsg = "[SPAN_MENTORHELP("<span class='prefix'>MENTOR LOG:</span> <span class='message'>[text]</span>")]"
@@ -116,12 +118,12 @@
 			continue
 
 		// Initial broadcast
-		else if(!staff_only && !recipient && CLIENT_HAS_RIGHTS(admin_client, R_MENTOR))
+		else if(!staff_only && !recipient && CLIENT_HAS_RIGHTS(admin_client, R_MENTOR) | CLIENT_HAS_RIGHTS(admin_client, R_COUNCIL))
 			formatted = wrap_message(formatted, sender)
 			soundfile = 'sound/effects/mhelp.ogg'
 
 		// Eavesdrop
-		else if(CLIENT_HAS_RIGHTS(admin_client, R_MENTOR) && (!staff_only || CLIENT_IS_STAFF(admin_client)) && admin_client != sender)
+		else if(CLIENT_HAS_RIGHTS(admin_client, R_MENTOR) | CLIENT_HAS_RIGHTS(admin_client, R_COUNCIL) && (!staff_only || CLIENT_IS_STAFF(admin_client)) && admin_client != sender)
 			if(include_keys)
 				formatted = SPAN_MENTORHELP(key_name(sender, TRUE) + " -> " + key_name(recipient, TRUE) + ": ") + msg
 
@@ -137,7 +139,7 @@
 	if(!sender || !check_open(sender))
 		return
 	if(sender != author)
-		if(!CLIENT_IS_MENTOR(sender))
+		if(!CLIENT_IS_MENTOR(sender) && !CLIENT_IS_COUNCIL(sender))
 			return
 
 		// If the mentor forgot to mark the mentorhelp, mark it for them
@@ -201,7 +203,7 @@
 		return
 
 	// Not a mentor/staff
-	if(!CLIENT_IS_MENTOR(thread_mentor))
+	if(!CLIENT_IS_MENTOR(thread_mentor) && !CLIENT_IS_COUNCIL(thread_mentor))
 		return
 
 	mentor = thread_mentor
@@ -294,7 +296,7 @@
 	if(!check_open(responder))
 		return
 
-	if(!CLIENT_IS_MENTOR(responder))
+	if(!CLIENT_IS_MENTOR(responder) && !CLIENT_IS_COUNCIL(responder))
 		return
 
 	// If the mentor forgot to mark the mentorhelp, mark it for them
@@ -314,7 +316,7 @@
 	if(!check_open(responder))
 		return
 
-	if(!CLIENT_IS_MENTOR(responder))
+	if(!CLIENT_IS_MENTOR(responder) && !CLIENT_IS_COUNCIL(responder))
 		return
 
 	// Re-mark if they unmarked it while the dialog was open (???)

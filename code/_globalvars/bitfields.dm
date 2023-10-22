@@ -35,6 +35,7 @@ DEFINE_BITFIELD(rights, list(
 	"PROFILER" = R_PROFILER,
 	"NOLOCK" = R_NOLOCK,
 	"EVENT" = R_EVENT,
+	"COUNCIL" = R_COUNCIL,
 ))
 
 DEFINE_BITFIELD(appearance_flags, list(

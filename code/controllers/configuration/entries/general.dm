@@ -150,6 +150,9 @@ Administrative related.
 /datum/config_entry/string/ooc_color_mods
 	config_entry_value = "#ffbf00"
 
+/datum/config_entry/string/ooc_color_council
+	config_entry_value = "#6b6b6b"
+
 /datum/config_entry/string/ooc_color_debug
 	config_entry_value = "#6bd1b4"
 

@@ -233,6 +233,7 @@
 	if(rights & R_MOD) . += "[seperator]+MODERATOR"
 	if(rights & R_MENTOR) . += "[seperator]+MENTOR"
 	if(rights & R_NOLOCK) . += "[seperator]+NOLOCK"
+	if(rights & R_COUNCIL) . += "[seperator]+COUNCIL"
 	return .
 
 /// Return html to load a url.

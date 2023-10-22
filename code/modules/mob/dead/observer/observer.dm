@@ -522,7 +522,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghostize(TRUE)
 	else
 		var/list/options = list("Ghost", "Stay in body")
-		if(check_other_rights(client, R_MOD, FALSE))
+		if(check_other_rights(client, R_MOD, FALSE) && check_other_rights(client, R_COUNCIL, FALSE))
 			options = list("Aghost") + options
 		var/text_prompt = "Are you -sure- you want to ghost?\n(You are alive. If you ghost, you won't be able to return to your body. You can't change your mind so choose wisely!)"
 		var/is_nested = (buckled && istype(buckled, /obj/structure/bed/nest)) ? TRUE : FALSE

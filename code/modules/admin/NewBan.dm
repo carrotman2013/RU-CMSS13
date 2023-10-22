@@ -233,7 +233,7 @@ var/savefile/Banlist
 
 	if(!ismob(M)) return
 
-	if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_MOD))
+	if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_MOD) || (M.client.admin_holder.rights & R_COUNCIL))
 		return //mods+ cannot be banned. Even if they could, the ban doesn't affect them anyway
 
 	if(!M.ckey)
