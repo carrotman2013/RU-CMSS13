@@ -52,7 +52,7 @@
 
 				if(isobserver(C.mob))
 					counted_humanoids["Observers"]++
-					if(C.admin_holder?.rights & R_MOD | C.admin_holder?.rights & R_COUNCIL)
+					if(C.admin_holder?.rights & R_MOD || C.admin_holder?.rights & R_COUNCIL)
 						counted_humanoids["Admin observers"]++
 						counted_humanoids["Observers"]--
 					var/mob/dead/observer/O = C.mob
