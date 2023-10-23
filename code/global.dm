@@ -24,6 +24,8 @@
 #define R_NOLOCK (1<<16)
 #define R_EVENT (1<<17)
 #define R_COUNCIL (1<<18)
+#define R_WHITELISTM (1<<19)
+#define R_GAMEMASTER (1<<20)
 
 /// The sum of all other rank permissions, other than host or profiler.
 #define RL_EVERYTHING (R_BUILDMODE|R_ADMIN|R_BAN|R_SERVER|R_DEBUG|R_PERMISSIONS|R_POSSESS|R_STEALTH|R_COLOR|R_VAREDIT|R_EVENT|R_SOUNDS|R_NOLOCK|R_SPAWN|R_MOD|R_COUNCIL|R_MENTOR)

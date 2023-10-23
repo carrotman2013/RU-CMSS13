@@ -44,6 +44,8 @@ var/list/admin_ranks = list() //list of all ranks with associated rights
 				if("council") rights |= R_COUNCIL
 				if("mentor") rights |= R_MENTOR
 				if("profiler") rights |= R_PROFILER
+				if("whitelistm") rights |= R_WHITELISTM
+				if("gamemaster") rights |= R_GAMEMASTER
 				if("host") rights |= RL_HOST
 				if("everything") rights |= RL_EVERYTHING
 

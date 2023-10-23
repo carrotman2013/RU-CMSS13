@@ -162,8 +162,10 @@
 	if(CONFIG_GET(flag/show_devs))
 		LAZYSET(mappings, "<B style='color:blue'>Maintainers</B>", R_PROFILER)
 	LAZYSET(mappings, "<B style='color:red'>Admins</B>", R_ADMIN)
-	if(CONFIG_GET(flag/show_mods))
-		LAZYSET(mappings, "<B style='color:orange'>Moderators</B>", R_MOD)
+	LAZYSET(mappings, "<B style='color:blue'>Game Masters</B>", R_GAMEMASTER)
+	LAZYSET(mappings, "<B style='color:blue'>Whitelist Maintainers</B>", R_WHITELISTM)
+//	if(CONFIG_GET(flag/show_mods))
+//		LAZYSET(mappings, "<B style='color:orange'>Moderators</B>", R_MOD)
 	LAZYSET(mappings, "<B style='color:grey'>Councils</B>", R_COUNCIL)
 	if(CONFIG_GET(flag/show_mentors))
 		LAZYSET(mappings, "<B style='color:green'>Mentors</B>", R_MENTOR)
@@ -173,7 +175,7 @@
 		LAZYSET(listings, category, list())
 
 	for(var/client/C in GLOB.admins)
-		if(C.admin_holder?.fakekey && !CLIENT_IS_STAFF(src) || !CLIENT_IS_COUNCIL(src))
+		if(C.admin_holder?.fakekey && !CLIENT_IS_STAFF(src) || C.admin_holder?.fakekey && !CLIENT_IS_COUNCIL(src))
 			continue
 		for(var/category in mappings)
 			if(CLIENT_HAS_RIGHTS(C, mappings[category]))
