@@ -469,7 +469,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 
 	unansweredAhelps?.Remove(computer_id)
 	log_access("Logout: [key_name(src)]")
-	if(CLIENT_IS_COUNCIL(src))
+	if(CLIENT_IS_COUNCIL(src) && !CLIENT_IS_STAFF(src))
 		message_admins("Council logout: [key_name(src)]")
 	if(CLIENT_IS_STAFF(src))
 		message_admins("Admin logout: [key_name(src)]")
@@ -488,7 +488,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 /// Handles login-related logging and associated notifications
 /client/proc/notify_login()
 	log_access("Login: [key_name(src)] from [address ? address : "localhost"]-[computer_id] || BYOND v[byond_version].[byond_build]")
-	if(CLIENT_IS_COUNCIL(src))
+	if(CLIENT_IS_COUNCIL(src) && !CLIENT_IS_STAFF(src))
 		message_admins("Council login: [key_name(src)]")
 	if(CLIENT_IS_STAFF(src))
 		message_admins("Admin login: [key_name(src)]")
