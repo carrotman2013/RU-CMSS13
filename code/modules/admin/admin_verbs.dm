@@ -73,6 +73,8 @@ var/list/admin_verbs_default = list(
 
 var/list/admin_verbs_council = list(
 	/datum/admins/proc/show_player_panel,
+	/client/proc/cmd_admin_change_their_name,
+	/datum/admins/proc/player_notes_show,
 	/client/proc/player_panel_new,
 	/datum/admins/proc/show_player_panel,
 	)
