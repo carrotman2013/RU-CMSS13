@@ -452,10 +452,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/gm/dirtgrassborder/north,
 /area/whiskey_outpost/outside/lane/three_south)
-"bE" = (
-/obj/effect/landmark/whiskey_outpost/xenobotspawn,
-/turf/open/gm/dirt,
-/area/whiskey_outpost/inside/caves/caverns/west)
 "bF" = (
 /obj/structure/disposalpipe/segment,
 /turf/open/jungle,
@@ -6186,6 +6182,10 @@
 	icon_state = "cell_stripe"
 	},
 /area/whiskey_outpost/inside/bunker)
+"wa" = (
+/obj/effect/landmark/whiskey_outpost/xenobotspawn,
+/turf/open/jungle,
+/area/whiskey_outpost/outside/south)
 "wb" = (
 /obj/structure/flora/jungle/alienplant1,
 /turf/open/gm/coast/beachcorner2/north_west,
@@ -9399,6 +9399,10 @@
 	icon_state = "asteroidwarning"
 	},
 /area/whiskey_outpost/outside/north/platform)
+"Ie" = (
+/obj/effect/landmark/whiskey_outpost/xenobotspawn,
+/turf/open/jungle,
+/area/whiskey_outpost/outside/lane/three_south)
 "If" = (
 /obj/structure/barricade/sandbags/wired,
 /obj/structure/barricade/sandbags/wired{
@@ -10446,10 +10450,6 @@
 	icon_state = "floor_plate"
 	},
 /area/whiskey_outpost/inside/bunker/bunker/front)
-"Ng" = (
-/obj/effect/landmark/whiskey_outpost/xenobotspawn,
-/turf/open/gm/dirt,
-/area/whiskey_outpost/inside/caves/caverns/east)
 "Nh" = (
 /obj/effect/landmark/start/whiskey/marine,
 /turf/open/gm/dirt,
@@ -18163,7 +18163,7 @@ Kt
 uJ
 uJ
 uJ
-bE
+uJ
 Wz
 uJ
 uJ
@@ -29680,7 +29680,7 @@ dH
 lg
 FL
 FL
-lf
+wa
 lf
 lf
 lf
@@ -30891,7 +30891,7 @@ yC
 mr
 lg
 xO
-xO
+Ie
 xO
 lf
 kV
@@ -35941,7 +35941,7 @@ TX
 uE
 uE
 uE
-Ng
+uE
 uE
 uE
 uE
