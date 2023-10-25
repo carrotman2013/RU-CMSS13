@@ -14,7 +14,7 @@
 		to_chat(src, SPAN_DANGER("You have OOC muted."))
 		return
 
-	if(!admin_holder || !(admin_holder.rights & R_MOD) || !(admin_holder.rights & R_COUNCIL))
+	if(!admin_holder || !(admin_holder.rights & (R_MOD|R_COUNCIL)))
 		if(!ooc_allowed) //Send to LOOC instead
 			looc(msg)
 			return
@@ -146,7 +146,7 @@
 		if(!M.client)
 			continue
 		var/client/C = M.client
-		if (C.admin_holder && (C.admin_holder.rights & R_MOD) && (C.admin_holder.rights & R_COUNCIL))
+		if (C.admin_holder && (C.admin_holder.rights & (R_MOD|R_COUNCIL)))
 			continue //they are handled after that
 
 		if(C.prefs.toggles_chat & CHAT_LOOC)
@@ -162,7 +162,7 @@
 		display_name = "[S.name]/([S.key])"
 
 	for(var/client/C in GLOB.admins)
-		if(!C.admin_holder || !(C.admin_holder.rights & R_MOD) && (C.admin_holder.rights & R_COUNCIL))
+		if(!C.admin_holder || !(C.admin_holder.rights & (R_MOD|R_COUNCIL)))
 			continue
 
 		if(C.prefs.toggles_chat & CHAT_LOOC)

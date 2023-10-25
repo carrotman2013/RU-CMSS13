@@ -1,6 +1,6 @@
 
 /datum/admins/proc/player_panel_new()//The new one
-	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & R_MOD) && !(usr.client.admin_holder.rights & R_COUNCIL))
+	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & (R_MOD|R_COUNCIL)))
 		return
 	var/dat = "<html>"
 
@@ -276,7 +276,7 @@
 
 //Extended panel with ban related things
 /datum/admins/proc/player_panel_extended()
-	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & R_MOD) && !(usr.client.admin_holder.rights & R_COUNCIL))
+	if (!usr.client.admin_holder || !(usr.client.admin_holder.rights & (R_MOD|R_COUNCIL)))
 		return
 
 	var/dat = "<html>"
@@ -605,7 +605,7 @@ GLOBAL_LIST_INIT(pp_status_flags, list(
 		var/client/C = src
 		src = C.admin_holder
 
-	if (!istype(src,/datum/admins) || !(src.rights & R_MOD) && !(src.rights & R_COUNCIL))
+	if (!istype(src,/datum/admins) || !(src.rights & (R_MOD|R_COUNCIL)))
 		to_chat(owner, "Error: you are not an admin!")
 		return
 

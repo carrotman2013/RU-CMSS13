@@ -94,7 +94,7 @@
 	set desc = "Toggle your visibility as a ghost to other ghosts."
 	set category = "Preferences.Ghost"
 
-	if(!admin_holder || !(admin_holder.rights & R_MOD) || !(admin_holder.rights & R_COUNCIL)) return
+	if(!admin_holder || !(admin_holder.rights & (R_MOD|R_COUNCIL))) return
 
 	if(isobserver(usr))
 		if(usr.invisibility <> 60 && usr.layer <> 4.0)
