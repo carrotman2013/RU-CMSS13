@@ -236,7 +236,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 		dest_index = 1
 		marine_announcement("Система аварийного самоуничтожения отключена.", "Система Самоуничтожения", 'sound/AI/selfdestruct_deactivated.ogg')
 		xeno_message("Мне комфортнее. Устройство очищения отключили!")
-		world << sound(null, repeat=0, wait=0, channel=SOUND_CHANNEL_SD)
+		world << sound(null, channel = SOUND_CHANNEL_SD)
 		dest_already_armed = 0
 		if(evac_status == EVACUATION_STATUS_STANDING_BY) //the evac has also been cancelled or was never started.
 			set_security_level(SEC_LEVEL_RED, TRUE) //both SD and evac are inactive, lowering the security level.
@@ -272,12 +272,12 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 		var/list/alive_mobs = list() //Everyone who will be destroyed on the zlevel(s).
 		var/list/dead_mobs = list() //Everyone who only needs to see the cinematic.
 		for(var/mob/current_mob as anything in GLOB.mob_list) //This only does something cool for the people about to die, but should prove pretty interesting.
-			if(!current_mob || !current_mob.loc)
+			var/turf/current_turf = get_turf(current_mob)
+			if(!current_mob || !current_mob.loc || !current_turf)
 				continue //In case something changes when we sleep().
 			if(current_mob.stat == DEAD)
 				dead_mobs |= current_mob
 				continue
-			var/turf/current_turf = get_turf(current_mob)
 			if(current_turf.z in z_levels)
 				alive_mobs |= current_mob
 				shake_camera(current_mob, 110, 4)
@@ -298,6 +298,8 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 		for(var/mob/current_mob in alive_mobs)
 			if(current_mob && current_mob.loc) //Who knows, maybe they escaped, or don't exist anymore.
 				var/turf/current_mob_turf = get_turf(current_mob)
+				if(!current_mob_turf)
+					continue
 				if(current_mob_turf.z in z_levels)
 					if(istype(current_mob.loc, /obj/structure/closet/secure_closet/freezer/fridge))
 						continue
@@ -473,7 +475,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 				marine_announcement("Тревога. Система аварийного самоуничтожения запущена. Обратный отсчет до уничтожения корабля - 10 минут. Обратный отсчет для отключения функции автоматического самоуничтожения - 5 минут.", "Система Самоуничтожения")
 				xeno_message("Улей очень сильно беспокоится. Механизм очищения работает во всю!")
 //				world << sound('sound/AI/ARES_Self_Destruct_10m_FULL.ogg', repeat = 0, wait = 0, volume = 70, channel = 666)
-				world << sound('code/modules/carrotman2013/sounds/AI/selfdestruct.ogg', repeat=0,wait=0,volume=53,channel=SOUND_CHANNEL_SD)
+				world << sound('code/modules/carrotman2013/sounds/AI/selfdestruct.ogg',volume=53,channel=SOUND_CHANNEL_SD)
 				EvacuationAuthority.dest_start_time = world.time
 				EvacuationAuthority.process_sd_ticking()
 				EvacuationAuthority.dest_already_armed = 1
