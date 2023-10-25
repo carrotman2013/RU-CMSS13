@@ -233,8 +233,10 @@ var/savefile/Banlist
 
 	if(!ismob(M)) return
 
-	if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_MOD) || (M.client.admin_holder.rights & R_COUNCIL))
+	if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_MOD))
 		return //mods+ cannot be banned. Even if they could, the ban doesn't affect them anyway
+	if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_COUNCIL))
+		return //councils too
 
 	if(!M.ckey)
 		to_chat(usr, SPAN_DANGER("<B>Внимание: Сикей для моба [M.name] не найден.</b>"))
