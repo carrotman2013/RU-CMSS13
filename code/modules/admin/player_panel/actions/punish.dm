@@ -48,7 +48,6 @@
 /datum/player_action/mute
 	action_tag = "mob_mute"
 	name = "Mute"
-	permissions_required = R_COUNCIL
 
 /datum/player_action/mute/act(client/user, mob/target, list/params)
 	if(!target.client)
@@ -61,8 +60,6 @@
 /datum/player_action/show_notes
 	action_tag = "show_notes"
 	name = "Show Notes"
-	permissions_required = R_COUNCIL
-
 
 /datum/player_action/show_notes/act(client/user, mob/target, list/params)
 	user.admin_holder.player_notes_show(target.ckey)
@@ -157,7 +154,6 @@
 /datum/player_action/reset_human_name
 	action_tag = "reset_human_name"
 	name = "Reset Human Name"
-	permissions_required = R_COUNCIL
 
 /datum/player_action/reset_human_name/act(client/user, mob/target, list/params)
 	var/mob/target_mob = target
