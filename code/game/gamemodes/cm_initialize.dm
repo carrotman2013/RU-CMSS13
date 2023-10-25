@@ -193,6 +193,7 @@ Additional game mode variables.
 	character.job = player_rank
 	character.name = character.real_name
 	character.voice = character.real_name
+	ADD_TRAIT(character, TRAIT_HARDCORE, TRAIT_SOURCE_QUIRK)
 
 	// Update the character icons
 	// This is done in set_species when the mob is created as well, but
