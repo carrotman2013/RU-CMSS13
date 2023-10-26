@@ -79,9 +79,9 @@
 		S["toggles_sound"] >> sound_toggles
 		sound_toggles |= (SOUND_ADMIN_MEME|SOUND_ADMIN_ATMOSPHERIC)
 		S["toggles_sound"] << sound_toggles
-    
+
 	if(savefile_version < 21)
-  	if(!(forced_voice in GLOB.tts_voices))
+		if(!(forced_voice in GLOB.tts_voices))
 			forced_voice = pick(GLOB.tts_voices)
 		var/pref_toggles
 		S["toggle_prefs"] >> pref_toggles
