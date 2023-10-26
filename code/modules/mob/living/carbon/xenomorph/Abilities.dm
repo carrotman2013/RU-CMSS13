@@ -107,7 +107,7 @@
 	ability_name = "screech"
 	macro_path = /datum/action/xeno_action/verb/verb_screech
 	action_type = XENO_ACTION_CLICK
-	xeno_cooldown = 80 SECONDS
+	xeno_cooldown = 60 SECONDS
 	plasma_cost = 250
 	cooldown_message = "You feel your throat muscles vibrate. You are ready to screech again."
 	no_cooldown_msg = FALSE // Needed for onclick actions
@@ -216,9 +216,9 @@
 	if(msg)
 		log_say("PsychicWhisper: [key_name(X)]->[M.key] : [msg]")
 		if(!istype(M, /mob/living/carbon/xenomorph))
-			to_chat(M, SPAN_XENO("You hear a strange, alien voice in your head. \"[msg]\""))
+			to_chat(M, SPAN_XENOQUEEN("You hear a strange, alien voice in your head. \"[msg]\""))
 		else
-			to_chat(M, SPAN_XENO("You hear the voice of [X] resonate in your head. \"[msg]\""))
+			to_chat(M, SPAN_XENOQUEEN("You hear the voice of [X] resonate in your head. \"[msg]\""))
 		to_chat(X, SPAN_XENONOTICE("You said: \"[msg]\" to [M]"))
 	return ..()
 
@@ -243,9 +243,9 @@
 			continue
 		target_list += possible_target
 		if(!istype(possible_target, /mob/living/carbon/xenomorph))
-			to_chat(possible_target, SPAN_XENO("You hear a strange, alien voice in your head. \"[msg]\""))
+			to_chat(possible_target, SPAN_XENOQUEEN("You hear a strange, alien voice in your head. \"[msg]\""))
 		else
-			to_chat(possible_target, SPAN_XENO("You hear the voice of [X] resonate in your head. \"[msg]\""))
+			to_chat(possible_target, SPAN_XENOQUEEN("You hear the voice of [X] resonate in your head. \"[msg]\""))
 	if(!length(target_list))
 		return
 	var/targetstring = english_list(target_list)

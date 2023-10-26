@@ -139,7 +139,8 @@
 #define SS_INIT_INFLUXSTATS 11
 #define SS_INIT_LIGHTING 10
 #define SS_INIT_DEFCON 9
-#define SS_INIT_TTS	7
+#define SS_INIT_TTS	8
+#define SS_INIT_ERTSTATIONS  7
 #define SS_INIT_LAW 6
 #define SS_INIT_FZ_TRANSITIONS 5
 #define SS_INIT_PROJECTILES 4.1
@@ -167,7 +168,6 @@
 #define SS_INIT_MINIMAP    -34
 #define SS_INIT_STATPANELS -98
 #define SS_INIT_CHAT    -100 //Should be last to ensure chat remains smooth during init.
-#define SS_INIT_EARLYRUNTIMES -500 // Post-init notifier
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
