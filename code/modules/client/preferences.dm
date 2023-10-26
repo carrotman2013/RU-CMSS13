@@ -243,7 +243,7 @@ var/const/MAX_SAVE_SLOTS = 10
 
 	var/tts_voice
 	var/forced_voice = "papa"
-  
+
 	/// If this client has auto observe enabled, used by /datum/orbit_menu
 	var/auto_observe = TRUE
 
